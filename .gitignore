@@ -31,3 +31,15 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+demo/.idea/*
+demo/build/*
+demo/.gradle/*
+demo/.gradle/4.1/*
+demo/.idea/**
+demo/app/build
+local.properties
+NonChina_Jcenter/demo/app/build
+NonChina_Jcenter/demo/.idea
+NonChina_Jcenter/demo/.gradle
+NonChina/demo/.gradle
