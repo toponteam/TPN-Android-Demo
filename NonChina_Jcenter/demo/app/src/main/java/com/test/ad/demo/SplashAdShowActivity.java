@@ -1,42 +1,28 @@
-/*
- * Copyright © 2018-2020 TopOn. All rights reserved.
- * https://www.toponad.com
- * Licensed under the TopOn SDK License Agreement
- * https://github.com/toponteam/TopOn-Android-SDK/blob/master/LICENSE
- */
-
 package com.test.ad.demo;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anythink.core.api.ATAdConst;
 import com.anythink.core.api.ATAdInfo;
 import com.anythink.core.api.ATAdSourceStatusListener;
 import com.anythink.core.api.ATNetworkConfirmInfo;
+import com.anythink.core.api.ATShowConfig;
 import com.anythink.core.api.AdError;
 import com.anythink.splashad.api.ATSplashAd;
 import com.anythink.splashad.api.ATSplashAdExtraInfo;
 import com.anythink.splashad.api.ATSplashExListener;
 import com.anythink.splashad.api.ATSplashSkipAdListener;
 import com.anythink.splashad.api.ATSplashSkipInfo;
+import com.test.ad.demo.base.BaseActivity;
 import com.test.ad.demo.zoomout.SplashEyeAdHolder;
 import com.test.ad.demo.zoomout.SplashZoomOutManager;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SplashAdShowActivity extends Activity implements ATSplashExListener {
 
@@ -44,8 +30,6 @@ public class SplashAdShowActivity extends Activity implements ATSplashExListener
 
     private ATSplashAd splashAd;
     private FrameLayout container;
-
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +48,7 @@ public class SplashAdShowActivity extends Activity implements ATSplashExListener
 
         String placementId = getIntent().getStringExtra("placementId");
         splashAd = new ATSplashAd(this, placementId, this, 5000);
+        splashAd.setNativeAdCustomRender(new BaseActivity.NativeAdCustomRender(this));
 
         splashAd.setAdSourceStatusListener(new ATAdSourceStatusListener() {
             @Override
@@ -103,7 +88,7 @@ public class SplashAdShowActivity extends Activity implements ATSplashExListener
             Log.i(TAG, "SplashAd is ready to show.");
             //splashAd.show(SplashAdShowActivity.this, container);
             //showAdWithCustomSkipView();//show with customSkipView
-            splashAd.show(SplashAdShowActivity.this, container, AdConst.SCENARIO_ID.SPLASH_AD_SCENARIO);
+            splashAd.show(SplashAdShowActivity.this, container, null, getATShowConfig());
         } else {
             Log.i(TAG, "SplashAd isn't ready to show, start to request.");
             splashAd.loadAd();
@@ -150,7 +135,7 @@ public class SplashAdShowActivity extends Activity implements ATSplashExListener
                     skipView.setVisibility(View.VISIBLE);
                 }
             }
-        }), AdConst.SCENARIO_ID.SPLASH_AD_SCENARIO);
+        }), getATShowConfig());
     }
 
     @Override
@@ -168,9 +153,9 @@ public class SplashAdShowActivity extends Activity implements ATSplashExListener
             return;
         }
 
-        splashAd.show(this, container);
+//        splashAd.show(this, container);
 //        showAdWithCustomSkipView();//show with customSkipView
-//            splashAd.show(this, container, "f628c7999265cd");
+        splashAd.show(this, container, null, getATShowConfig());
     }
 
     @Override
@@ -272,6 +257,9 @@ public class SplashAdShowActivity extends Activity implements ATSplashExListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (container != null) {
+            container.removeAllViews();
+        }
         if (splashAd != null) {
             splashAd.setAdListener(null);
             splashAd.setAdDownloadListener(null);
@@ -280,8 +268,20 @@ public class SplashAdShowActivity extends Activity implements ATSplashExListener
     }
 
     @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+    }
+
+    @Override
     public void onDownloadConfirm(Context context, ATAdInfo adInfo, ATNetworkConfirmInfo networkConfirmInfo) {
 
     }
 
+    private ATShowConfig getATShowConfig() {
+        ATShowConfig.Builder builder = new ATShowConfig.Builder();
+        builder.scenarioId(AdConst.SCENARIO_ID.SPLASH_AD_SCENARIO);
+        builder.showCustomExt(AdConst.SHOW_CUSTOM_EXT.SPLASH_AD_SHOW_CUSTOM_EXT);
+
+        return builder.build();
+    }
 }

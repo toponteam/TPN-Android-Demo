@@ -1,10 +1,3 @@
-/*
- * Copyright © 2018-2020 TopOn. All rights reserved.
- * https://www.toponad.com
- * Licensed under the TopOn SDK License Agreement
- * https://github.com/toponteam/TopOn-Android-SDK/blob/master/LICENSE
- */
-
 package com.test.ad.demo;
 
 import android.annotation.SuppressLint;
@@ -23,6 +16,7 @@ import com.anythink.core.api.ATAdInfo;
 import com.anythink.core.api.ATNativeAdCustomRender;
 import com.anythink.core.api.ATNativeAdInfo;
 import com.anythink.core.api.ATNetworkConfirmInfo;
+import com.anythink.core.api.ATShowConfig;
 import com.anythink.core.api.AdError;
 import com.test.ad.demo.base.BaseActivity;
 import com.test.ad.demo.bean.CommonViewBean;
@@ -55,6 +49,8 @@ public class BannerAdActivity extends BaseActivity implements View.OnClickListen
     protected void onSelectPlacementId(String placementId) {
         mBannerView.setPlacementId(placementId);
         ATBannerView.entryAdScenario(placementId, AdConst.SCENARIO_ID.BANNER_AD_SCENARIO);
+        //        mBannerView.setScenario(AdConst.SCENARIO_ID.BANNER_AD_SCENARIO);
+        mBannerView.setShowConfig(getATShowConfig());
     }
 
     @Override
@@ -181,13 +177,8 @@ public class BannerAdActivity extends BaseActivity implements View.OnClickListen
         localMap.put(ATAdConst.KEY.AD_HEIGHT, dip2px(60));
         mBannerView.setLocalExtra(localMap);
 
-        //横幅广告使用原生自渲染广告，只需要在发起请求时额外设置setNativeAdCustomRender即可，请求、展示广告流程同横幅广告接入流程相同。
-        mBannerView.setNativeAdCustomRender(new ATNativeAdCustomRender() {
-            @Override
-            public View getMediationViewFromNativeAd(ATNativeAdInfo mixNativeAd, ATAdInfo atAdInfo) {
-                return MediationNativeAdUtil.getViewFromNativeAd(BannerAdActivity.this, mixNativeAd, atAdInfo, false);
-            }
-        });
+        //横幅广告使用原生自渲染广告时，设置自定义渲染方式：只需要在发起请求时额外设置setNativeAdCustomRender即可，请求、展示广告流程同横幅广告接入流程相同。
+        mBannerView.setNativeAdCustomRender(new NativeAdCustomRender(this));
 
         mBannerView.loadAd();
     }
@@ -220,5 +211,13 @@ public class BannerAdActivity extends BaseActivity implements View.OnClickListen
         if (v.getId() == R.id.banner_load_ad_btn) {
             loadAd();
         }
+    }
+
+    private ATShowConfig getATShowConfig() {
+        ATShowConfig.Builder builder = new ATShowConfig.Builder();
+        builder.scenarioId(AdConst.SCENARIO_ID.BANNER_AD_SCENARIO);
+        builder.showCustomExt(AdConst.SHOW_CUSTOM_EXT.BANNER_AD_SHOW_CUSTOM_EXT);
+
+        return builder.build();
     }
 }
