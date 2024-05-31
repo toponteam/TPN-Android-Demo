@@ -6,25 +6,25 @@
 
 <!--    Only for Test-->
 <!--    <domain-config>-->
-<!--        <domain includeSubdomains="true">api.anythinktech.com</domain>-->
+<!--        <domain includeSubdomains="true">api.mosspf.com</domain>-->
 <!--        <trust-anchors>-->
 <!--            <certificates src="user"/>-->
 <!--        </trust-anchors>-->
 <!--    </domain-config>-->
 <!--    <domain-config>-->
-<!--        <domain includeSubdomains="true">da.anythinktech.com</domain>-->
+<!--        <domain includeSubdomains="true">da.mosspf.com</domain>-->
 <!--        <trust-anchors>-->
 <!--            <certificates src="user"/>-->
 <!--        </trust-anchors>-->
 <!--    </domain-config>-->
 <!--    <domain-config>-->
-<!--        <domain includeSubdomains="true">tk.anythinktech.com</domain>-->
+<!--        <domain includeSubdomains="true">tk.mosspf.com</domain>-->
 <!--        <trust-anchors>-->
 <!--            <certificates src="user"/>-->
 <!--        </trust-anchors>-->
 <!--    </domain-config>-->
 <!--    <domain-config>-->
-<!--        <domain includeSubdomains="true">aa.birdgesdk.com</domain>-->
+<!--        <domain includeSubdomains="true">aa.unioneeu.com</domain>-->
 <!--        <trust-anchors>-->
 <!--            <certificates src="user"/>-->
 <!--        </trust-anchors>-->
