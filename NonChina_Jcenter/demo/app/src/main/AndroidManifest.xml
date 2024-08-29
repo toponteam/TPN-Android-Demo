@@ -19,6 +19,7 @@
     <!-- <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> -->
     <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
     <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
     <!-- <uses-permission android:name="android.permission.WAKE_LOCK" /> -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -32,7 +33,8 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar"
         android:usesCleartextTraffic="true"
-        tools:remove="android:taskAffinity" >
+        tools:remove="android:taskAffinity"
+        tools:replace="android:usesCleartextTraffic" >
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-9488501426181082~6354662111" />
@@ -40,6 +42,11 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
+        <meta-data
+            android:name="hw_ads_sdk_type"
+            android:value="6"
+            tools:node="replace" />
 
         <activity
             android:name="com.test.ad.demo.MainActivity"
@@ -104,7 +111,7 @@
             android:exported="false"
             android:label="MediaVideo" />
 
-        <!-- source file: nonchina_jcenter/network_sdk/admob/23.0.0/AndroidManifest.xml -->
+        <!-- source file: nonchina_jcenter/network_sdk/admob/23.2.0/AndroidManifest.xml -->
         <!-- google -->
         <meta-data
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"

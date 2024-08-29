@@ -77,6 +77,8 @@ public class SplashAdActivity extends BaseActivity implements View.OnClickListen
 
         mSplashAd.setLocalExtra(localMap);
         mSplashAd.setAdSourceStatusListener(new ATAdSourceStatusListenerImpl());
+        mSplashAd.setAdMultipleLoadedListener(new AdMultipleLoadedListener());
+        mSplashAd.setAdRevenueListener(new AdRevenueListenerImpl());
     }
 
     private void loadAd() {
@@ -127,6 +129,7 @@ public class SplashAdActivity extends BaseActivity implements View.OnClickListen
             mSplashAd.setAdListener(null);
             mSplashAd.setAdDownloadListener(null);
             mSplashAd.setAdSourceStatusListener(null);
+            mSplashAd.setAdMultipleLoadedListener(null);
         }
         super.onDestroy();
     }

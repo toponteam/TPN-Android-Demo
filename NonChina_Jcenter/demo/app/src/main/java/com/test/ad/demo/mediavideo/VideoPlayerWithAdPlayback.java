@@ -50,6 +50,7 @@ public class VideoPlayerWithAdPlayback extends RelativeLayout {
 
     // The saved position in the ad to resume if app is backgrounded during ad playback.
     private int savedAdPosition;
+    private int lastContentPosition;
 
     // The saved position in the content to resume to after ad playback or if app is backgrounded
     // during content playback.
@@ -108,7 +109,7 @@ public class VideoPlayerWithAdPlayback extends RelativeLayout {
         timer.schedule(updateTimerTask, pollingTimeMs, initialDelayMs);
     }
 
-    private void stopTracking() {
+    public void stopTracking() {
         if (timer != null) {
             timer.cancel();
             timer = null;
@@ -131,7 +132,7 @@ public class VideoPlayerWithAdPlayback extends RelativeLayout {
                 adMediaInfo = info;
                 startTracking();
                 Log.d(TAG, "playAd isAdDisplayed:" + isAdDisplayed + ",lastAdInfoUrl:" + lastAdInfoUrl + ",info.getUrl():" + info.getUrl());
-                if (isAdDisplayed) {
+                if (isAdDisplayed && TextUtils.equals(lastAdInfoUrl,info.getUrl())) {
                     Log.d(TAG, "playAd: videoPlayer.resume()");
                     videoPlayer.resume();
                 } else {
@@ -148,12 +149,13 @@ public class VideoPlayerWithAdPlayback extends RelativeLayout {
             @Override
             public void loadAd(ATAdMediaInfo info, ATAdPodInfo api) {
                 Log.d(TAG, "loadAd: ");
-                isAdDisplayed = false;
+
             }
 
             @Override
             public void stopAd(ATAdMediaInfo info) {
                 Log.d(TAG, "stopAd: ");
+                isAdDisplayed = false;
                 stopTracking();
                 videoPlayer.stopPlayback();
             }
@@ -194,10 +196,7 @@ public class VideoPlayerWithAdPlayback extends RelativeLayout {
         contentProgressProvider = new ContentProgressProvider() {
             @Override
             public VideoProgressUpdate getContentProgress() {
-                if (!readyToPlayContent || isAdDisplayed || videoPlayer.getDuration() <= 0) {
-                    return VideoProgressUpdate.VIDEO_TIME_NOT_READY;
-                }
-                return new VideoProgressUpdate(videoPlayer.getCurrentPosition(), videoPlayer.getDuration());
+                return getVideoContentProgress();
             }
         };
 
@@ -266,6 +265,7 @@ public class VideoPlayerWithAdPlayback extends RelativeLayout {
         readyToPlayContent = false;
         savedAdPosition = 0;
         savedContentPosition = 0;
+        lastContentPosition = 0;
         restorePosition();
     }
 
@@ -388,9 +388,6 @@ public class VideoPlayerWithAdPlayback extends RelativeLayout {
         return isAdDisplayed;
     }
 
-    public ContentProgressProvider getContentProgressProvider() {
-        return contentProgressProvider;
-    }
 
     public void enableControls() {
         // Calling enablePlaybackControls(0) with 0 milliseconds shows the controls until
@@ -409,6 +406,29 @@ public class VideoPlayerWithAdPlayback extends RelativeLayout {
 
     public void setReadyToPlayContent(boolean readyToPlayContent) {
         this.readyToPlayContent = readyToPlayContent;
+    }
+
+    private VideoProgressUpdate getVideoContentProgress(){
+        if (!readyToPlayContent || isAdDisplayed || videoPlayer.getDuration() <= 0) {
+            return VideoProgressUpdate.VIDEO_TIME_NOT_READY;
+        }
+        //add lastContentPosition to avoid return VideoProgressUpdate with wrong position
+
+        int curVideoPosition = videoPlayer.getCurrentPosition();
+        if (lastContentPosition == 0) {
+            lastContentPosition = curVideoPosition;
+            return VideoProgressUpdate.VIDEO_TIME_NOT_READY;
+        }
+        if (lastContentPosition >= curVideoPosition) {
+            lastContentPosition = curVideoPosition;
+            return VideoProgressUpdate.VIDEO_TIME_NOT_READY;
+        }
+        lastContentPosition = curVideoPosition;
+        return new VideoProgressUpdate(curVideoPosition, videoPlayer.getDuration());
+    }
+
+    public ContentProgressProvider getContentProgressProvider(){
+        return contentProgressProvider;
     }
 }
 

@@ -92,7 +92,7 @@ public class InterstitialAdActivity extends BaseActivity implements View.OnClick
 
     private void initInterstitialAd(String placementId) {
         mInterstitialAd = new ATInterstitial(this, placementId);
-
+        mInterstitialAd.setAdRevenueListener(new AdRevenueListenerImpl());
         mInterstitialAd.setAdListener(new ATInterstitialExListener() {
 
             @Override
@@ -158,6 +158,7 @@ public class InterstitialAdActivity extends BaseActivity implements View.OnClick
         });
 
         mInterstitialAd.setAdSourceStatusListener(new ATAdSourceStatusListenerImpl());
+        mInterstitialAd.setAdMultipleLoadedListener(new AdMultipleLoadedListener());
     }
 
     private void initAutoLoad() {
@@ -224,7 +225,7 @@ public class InterstitialAdActivity extends BaseActivity implements View.OnClick
     private void showAd() {
         if (mIsAutoLoad) {
 //            ATInterstitialAutoAd.show(this, mCurrentPlacementId, autoEventListener);
-            ATInterstitialAutoAd.show(this, mCurrentPlacementId, getATShowConfig(), autoEventListener);
+            ATInterstitialAutoAd.show(this, mCurrentPlacementId, getATShowConfig(), autoEventListener, new AdRevenueListenerImpl());
         } else {
 //            mInterstitialAd.show(InterstitialAdActivity.this);
             mInterstitialAd.show(InterstitialAdActivity.this, getATShowConfig());
@@ -305,6 +306,7 @@ public class InterstitialAdActivity extends BaseActivity implements View.OnClick
             mInterstitialAd.setAdSourceStatusListener(null);
             mInterstitialAd.setAdDownloadListener(null);
             mInterstitialAd.setAdListener(null);
+            mInterstitialAd.setAdMultipleLoadedListener(null);
         }
     }
 

@@ -161,6 +161,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
         });
 
         mATNative.setAdSourceStatusListener(new ATAdSourceStatusListenerImpl());
+        mATNative.setAdMultipleLoadedListener(new AdMultipleLoadedListener());
     }
 
     private void loadAd(int adViewWidth, int adViewHeight) {
@@ -200,6 +201,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
             }
             mNativeAd = nativeAd;
 
+            mNativeAd.setAdRevenueListener(new AdRevenueListenerImpl());
             mNativeAd.setNativeEventListener(new ATNativeEventExListener() {
                 @Override
                 public void onDeeplinkCallback(ATNativeAdView view, ATAdInfo adInfo, boolean isSuccess) {
@@ -281,6 +283,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
         if (mATNative != null) {
             mATNative.setAdListener(null);
             mATNative.setAdSourceStatusListener(null);
+            mATNative.setAdMultipleLoadedListener(null);
         }
     }
 

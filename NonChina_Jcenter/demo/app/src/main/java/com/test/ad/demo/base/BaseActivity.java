@@ -18,24 +18,33 @@ import androidx.annotation.Nullable;
 
 import com.anythink.core.api.ATAdConst;
 import com.anythink.core.api.ATAdInfo;
+import com.anythink.core.api.ATAdMultipleLoadedListener;
+import com.anythink.core.api.ATAdRevenueListener;
 import com.anythink.core.api.ATAdSourceStatusListener;
 import com.anythink.core.api.ATNativeAdCustomRender;
 import com.anythink.core.api.ATNativeAdInfo;
+import com.anythink.core.api.ATRequestingInfo;
 import com.anythink.core.api.AdError;
+import com.google.ads.interactivemedia.v3.api.player.ContentProgressProvider;
+import com.google.ads.interactivemedia.v3.api.player.VideoProgressUpdate;
 import com.test.ad.demo.NativeAdActivity;
 import com.test.ad.demo.TitleBar;
 import com.test.ad.demo.bean.AnnotationAdType;
 import com.test.ad.demo.bean.CommonViewBean;
+import com.test.ad.demo.mediavideo.VideoPlayerWithAdPlayback;
 import com.test.ad.demo.util.MediationNativeAdUtil;
 import com.test.ad.demo.util.PlacementIdUtil;
 import com.test.ad.demo.util.ViewUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public abstract class BaseActivity extends Activity {
+
+    protected String TAG = getClass().getSimpleName();
     protected String mCurrentPlacementName;
     protected String mCurrentPlacementId;
     private Map<String, String> mPlacementIdMap;
@@ -43,6 +52,7 @@ public abstract class BaseActivity extends Activity {
 
     protected TextView mTVShowLog;
     private static WeakReference<TextView> mTVShowLogWR;
+    private static WeakReference<VideoPlayerWithAdPlayback> mVideoPlayWR;
 
 
     @Override
@@ -89,6 +99,26 @@ public abstract class BaseActivity extends Activity {
         ViewUtil.printLog(mTVShowLogWR.get(), msg);
     }
 
+    protected static void resumeContent(){
+        if (mVideoPlayWR == null || mVideoPlayWR.get() == null) return;
+        mVideoPlayWR.get().resumeContentAfterAdPlayback();
+    }
+
+    protected static void pauseContent(){
+        if (mVideoPlayWR == null || mVideoPlayWR.get() == null) return;
+        mVideoPlayWR.get().pauseContentForAdPlayback();
+    }
+
+    protected static void setReadyToPlayContent(boolean readyToPlayContent){
+        if (mVideoPlayWR == null || mVideoPlayWR.get() == null) return;
+        mVideoPlayWR.get().setReadyToPlayContent(readyToPlayContent);
+    }
+
+    protected static ContentProgressProvider getContentProgressProvider(){
+        if (mVideoPlayWR == null || mVideoPlayWR.get() == null) return null;
+        return mVideoPlayWR.get().getContentProgressProvider();
+    }
+
     private void setTitleBar(TitleBar titleBar, int titleResId) {
         if (titleBar != null && titleResId != 0) {
             titleBar.setTitle(titleResId);
@@ -109,6 +139,9 @@ public abstract class BaseActivity extends Activity {
             if (mTVShowLog != null) {
                 mTVShowLogWR = new WeakReference<>(mTVShowLog);
                 mTVShowLog.setMovementMethod(ScrollingMovementMethod.getInstance());
+            }
+            if (commonViewBean.getVideoPlayerWithAdPlayback() != null) {
+                mVideoPlayWR = new WeakReference<>(commonViewBean.getVideoPlayerWithAdPlayback());
             }
         }
     }
@@ -144,11 +177,23 @@ public abstract class BaseActivity extends Activity {
         if (spinner == null || mPlacementIdMap == null || mPlacementIdMap.size() == 0) return;
 
         List<String> placementNameList = new ArrayList<>(mPlacementIdMap.keySet());
-
+        sortPlacementList(placementNameList);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, placementNameList);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new PlacementSelectListenerImpl());
+    }
+
+    private void sortPlacementList(List<String> placementNameList) {
+        if (placementNameList != null && !placementNameList.isEmpty()) {
+            Collections.sort(placementNameList);
+
+            String excludeName = "All";
+            if (placementNameList.contains(excludeName)) {
+                placementNameList.remove(excludeName);
+                placementNameList.add(0, excludeName);
+            }
+        }
     }
 
     private class PlacementSelectListenerImpl implements AdapterView.OnItemSelectedListener {
@@ -218,6 +263,31 @@ public abstract class BaseActivity extends Activity {
         @Override
         public View getMediationViewFromNativeAd(ATNativeAdInfo mixNativeAd, ATAdInfo atAdInfo) {
             return MediationNativeAdUtil.getViewFromNativeAd(context, mixNativeAd, atAdInfo, false);
+        }
+    }
+
+    public class AdMultipleLoadedListener implements ATAdMultipleLoadedListener {
+
+        @Override
+        public void onAdMultipleLoaded(ATRequestingInfo requestingInfo) {
+            if (requestingInfo != null) {
+                List<ATAdInfo> loadingAdInfoList = requestingInfo.getLoadingAdInfoList();
+                List<ATAdInfo> biddingAttemptAdInfoList = requestingInfo.getBiddingAttemptAdInfoList();
+
+                Log.i(TAG, "onAdMultipleLoaded: loadingHigherPriceAdSize=" + (loadingAdInfoList != null ? loadingAdInfoList.size() : 0) + ", " + loadingAdInfoList
+                        + "\n" + "biddingAttemptAdSize=" + (biddingAttemptAdInfoList != null ? biddingAttemptAdInfoList.size() : 0) + ", " + biddingAttemptAdInfoList
+                ) ;
+            } else {
+                Log.i(TAG, "onAdMultipleLoaded: loadingHigherPriceAdSize=0, biddingAttemptAdSize=0");
+            }
+        }
+    }
+
+    public class AdRevenueListenerImpl implements ATAdRevenueListener {
+        @Override
+        public void onAdRevenuePaid(ATAdInfo adInfo) {
+            Log.i(TAG, "onAdRevenuePaid: " + adInfo.toString());
+            printLogOnUI("onAdRevenuePaid");
         }
     }
 }
