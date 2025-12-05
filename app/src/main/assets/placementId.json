@@ -1,0 +1,26 @@
+{
+  "app_id": "a5aa1f9deda26d",
+  "app_key": "4f7b9ac17decb9babec83aac078742c7",
+  "list_placement_id": "b62fb58f6b79e7",
+  "rewarded_video": {
+    "All": "b5b449fb3d89d7"
+  },
+  "interstitial": {
+    "All": "b5baca53984692"
+  },
+  "banner": {
+    "All": "b5baca4f74c3d8"
+  },
+  "native-express": {
+    "All": "b5aa1fa2cae775"
+  },
+  "native-selfrender": {
+    "All": "b5aa1fa2cae775"
+  },
+  "splash": {
+    "All": "b5bea7cc9a4497"
+  },
+  "media_video": {
+    "All": "b6602833ace122"
+  }
+}

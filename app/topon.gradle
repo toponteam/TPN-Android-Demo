@@ -1,0 +1,235 @@
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    //Anythink(Core)
+    maven {
+        url "https://jfrog.anythinktech.com/artifactory/overseas_sdk"
+    }
+
+    //Maio
+    maven {
+        url "https://imobile-maio.github.io/maven"
+    }
+
+    //Ironsource
+    maven {
+        url "https://android-sdk.is.com/"
+    }
+
+    //Pubnative
+    maven {
+        url "https://verve.jfrog.io/artifactory/verve-gradle-release"
+    }
+
+    //Taurusx
+    maven {
+        url "https://bitbucket.org/sdkcenter/sdkcenter/raw/release"
+    }
+
+    //Smaato
+    maven {
+        url "https://s3.amazonaws.com/smaato-sdk-releases/"
+    }
+
+    //Pangle
+    maven {
+        url "https://artifact.bytedance.com/repository/pangle"
+    }
+
+    //Huawei
+    maven {
+        url "https://developer.huawei.com/repo/"
+    }
+
+    //Mintegral
+    maven {
+        url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea"
+    }
+
+    //Bidmachine
+    maven {
+        url "https://artifactory.bidmachine.io/bidmachine"
+    }
+
+    //Chartboost
+    maven {
+        url "https://cboost.jfrog.io/artifactory/chartboost-ads"
+    }
+    maven {
+        url "https://cboost.jfrog.io/artifactory/chartboost-mediation"
+    }
+
+    //Ogury
+    maven {
+        url "https://maven.ogury.co"
+    }
+
+}
+dependencies {
+    //Anythink (Necessary)
+    api "com.anythink.sdk:core-tpn:6.5.36.1"
+    api "com.anythink.sdk:nativead-tpn:6.5.36.1"
+    api "com.anythink.sdk:banner-tpn:6.5.36.1"
+    api "com.anythink.sdk:interstitial-tpn:6.5.36.1"
+    api "com.anythink.sdk:rewardedvideo-tpn:6.5.36.1"
+    api "com.anythink.sdk:splash-tpn:6.5.36.1"
+    api "com.anythink.sdk:dm-vp-tpn:6.5.36.1"
+
+    //Androidx (Necessary)
+    api "androidx.appcompat:appcompat:1.6.1"
+    api "androidx.browser:browser:1.4.0"
+
+    //Maio
+    api "com.anythink.sdk:adapter-tpn-maio:6.5.36"
+    api "com.maio:android-sdk:1.1.16@aar"
+    api "com.google.android.gms:play-services-ads-identifier:18.0.1"
+
+    //StartApp
+    api "com.anythink.sdk:adapter-tpn-startapp:6.5.36"
+    api "com.startapp:inapp-sdk:5.2.4"
+
+    //Vungle
+    api "com.anythink.sdk:adapter-tpn-vungle:6.5.36.4"
+    api "com.vungle:vungle-ads:7.6.1"
+    api "com.google.android.gms:play-services-basement:18.1.0"
+    api "com.google.android.gms:play-services-ads-identifier:18.0.1"
+
+    //UnityAds
+    api "com.anythink.sdk:adapter-tpn-unityads:6.5.36"
+    api "com.unity3d.ads:unity-ads:4.16.1"
+
+    //Ironsource
+    api "com.anythink.sdk:adapter-tpn-ironsource:6.5.36"
+    api "com.ironsource.sdk:mediationsdk:8.10.0"
+    api "com.google.android.gms:play-services-appset:16.0.2"
+    api "com.google.android.gms:play-services-ads-identifier:18.0.1"
+    api "com.google.android.gms:play-services-basement:18.1.0"
+
+    //Bigo
+    api "com.anythink.sdk:adapter-tpn-bigo:6.5.36"
+    api "com.bigossp:bigo-ads:5.5.1"
+
+    //Pubnative
+    api "com.anythink.sdk:adapter-tpn-pubnative:6.5.36"
+    api "net.pubnative:hybid.sdk:3.6.2"
+
+    //Xiaomi
+    api "com.anythink.sdk:adapter-tpn-xiaomi:6.5.36.1"
+    api "com.mi.ads:columbus-sdk:4.0.4.6"
+
+    //Taurusx
+    api "com.anythink.sdk:adapter-tpn-taurusx:6.5.36"
+    api "com.taurusx.tax:ads:1.10.1"
+
+    //Smaato
+    api "com.anythink.sdk:adapter-tpn-smaato:6.5.36"
+    api "com.smaato.android.sdk:smaato-sdk:22.7.2"
+    api "com.smaato.android.sdk:smaato-sdk-banner:22.7.2"
+    api "com.smaato.android.sdk:smaato-sdk-interstitial:22.7.2"
+    api "com.smaato.android.sdk:smaato-sdk-rewarded-ads:22.7.2"
+    api "com.smaato.android.sdk:smaato-sdk-native:22.7.2"
+    api "com.smaato.android.sdk:smaato-sdk-in-app-bidding:22.7.2"
+    api "com.google.android.gms:play-services-ads-identifier:18.0.1"
+
+    //Pangle
+    api "com.anythink.sdk:adapter-tpn-pangle:6.5.36"
+    api "com.pangle.global:pag-sdk:7.6.0.2"
+    api "com.google.android.gms:play-services-ads-identifier:18.2.0"
+
+    //Amazon
+    api "com.anythink.sdk:adapter-tpn-amazon:6.5.36"
+    api "com.amazon.android:aps-sdk:11.0.1"
+    api "com.iabtcf:iabtcf-decoder:2.0.10"
+
+    //Kwai
+    api "com.anythink.sdk:adapter-tpn-kwai:6.5.36.1"
+    api "io.github.kwainetwork:adApi:1.2.21"
+    api "io.github.kwainetwork:adImpl:1.2.21"
+    api "androidx.media3:media3-exoplayer:1.0.0-alpha01"
+    api "androidx.appcompat:appcompat:1.6.1"
+    api "com.google.android.material:material:1.2.1"
+    api "androidx.annotation:annotation:1.2.0"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10"
+    api "com.google.android.gms:play-services-ads-identifier:18.0.1"
+
+    //Googleima
+    api "com.anythink.sdk:adapter-tpn-googleima:6.5.36"
+    api "com.anythink.sdk:mediavideo-tpn:6.5.36"
+    api "com.google.ads.interactivemedia.v3:interactivemedia:3.33.0"
+    api "androidx.appcompat:appcompat:1.6.1"
+    api "androidx.browser:browser:1.6.0"
+    api "androidx.media:media:1.6.0"
+
+    //Kidoz
+    api "com.anythink.sdk:adapter-tpn-kidoz:6.5.36"
+    api "net.kidoz.sdk:kidoz-android-native:8.9.7"
+    api "org.greenrobot:eventbus:3.3.1"
+
+    //Huawei
+    api "com.anythink.sdk:adapter-tpn-huawei:6.5.36"
+    api "com.huawei.hms:ads-lite:13.4.78.301"
+
+    //Facebook
+    api "com.anythink.sdk:adapter-tpn-facebook:6.5.36"
+    api "com.facebook.android:audience-network-sdk:6.20.0"
+    api "androidx.annotation:annotation:1.0.0"
+
+    //Admob
+    api "com.anythink.sdk:adapter-tpn-admob:6.5.36"
+    api "com.google.android.gms:play-services-ads:24.6.0"
+
+    //Inmobi
+    api "com.anythink.sdk:adapter-tpn-inmobi:6.5.36"
+    api "com.inmobi.monetization:inmobi-ads-kotlin:10.8.7"
+
+    //Anythink Adx SDK(Necessary)
+    api "com.anythink.sdk:adapter-tpn-sdm:6.5.36.5"
+    api "com.smartdigimkttech.sdk:smartdigimkttech-sdk:6.5.45"
+
+    //AppLovin
+    api "com.anythink.sdk:adapter-tpn-applovin:6.5.36"
+    api "com.applovin:applovin-sdk:13.4.0"
+
+    //Mintegral
+    api "com.anythink.sdk:adapter-tpn-mintegral:6.5.36"
+    api "com.mbridge.msdk.oversea:mbridge_android_sdk:16.9.91"
+    api "androidx.recyclerview:recyclerview:1.1.0"
+
+    //Bidmachine
+    api "com.anythink.sdk:adapter-tpn-bidmachine:6.5.36"
+    api "io.bidmachine:ads:3.3.0"
+
+    //Chartboost
+    api "com.anythink.sdk:adapter-tpn-chartboost:6.5.36.4"
+    api "com.chartboost:chartboost-sdk:9.10.2"
+    api "com.chartboost:chartboost-mediation-sdk:4.9.2"
+    api "com.chartboost:chartboost-mediation-adapter-chartboost:4.9.8.1.0"
+    api "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0"
+    api "com.squareup.okhttp3:logging-interceptor:4.10.0"
+    api "com.squareup.okhttp3:okhttp:4.10.0"
+    api "com.squareup.retrofit2:converter-scalars:2.9.0"
+    api "com.squareup.retrofit2:retrofit:2.9.0"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1"
+    api "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
+
+    //Mytarget
+    api "com.anythink.sdk:adapter-tpn-mytarget:6.5.36"
+    api "com.my.target:mytarget-sdk:5.27.1"
+
+    //Yandex
+    api "com.anythink.sdk:adapter-tpn-yandex:6.5.36"
+    api "com.yandex.android:mobileads:7.15.1"
+
+    //Fyber
+    api "com.anythink.sdk:adapter-tpn-fyber:6.5.36"
+    api "com.fyber:marketplace-sdk:8.3.7"
+    api "com.google.android.gms:play-services-ads-identifier:18.0.1"
+
+    //Ogury
+    api "com.anythink.sdk:adapter-tpn-ogury:6.5.36"
+    api "co.ogury:ogury-sdk:5.2.0"
+
+//Tramini
+    api "com.anythink.sdk:tramini-plugin-tpn:6.5.36"
+}
