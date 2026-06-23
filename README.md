@@ -24,7 +24,7 @@ We support Android Operating Systems Version 4.1 (API Level 16) and up. Be sure 
 - MinSdkVersion level 16 and up
 
 ## Integration instructions
-https://help.toponad.com/cn/docs/jXeMC9
+[https://help.toponad.net/docs/vxp6Qy](https://help.toponad.net/docs/vxp6Qy)
 
 ## LICENSE
 
