@@ -8,7 +8,7 @@ Official website ： https://help.toponad.com/
 
 Business Cooperation : business@toponad.com
 
-Market Cooperation : leon@toponad.com
+Market Cooperation : marketing@toponad.com
 
 Technical Support : support@toponad.com
 
