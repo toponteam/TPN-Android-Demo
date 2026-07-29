@@ -97,6 +97,11 @@ public class AdMobInitManager extends ATInitMediation {
         return AdmobConst.getNetworkVersion();
     }
 
+    @Override
+    public int getAdapterBridgeVersion() {
+        return 0;
+    }
+
     protected AdRequest.Builder getRequestBuilder() {
         AdRequest.Builder requestBuilder = new AdRequest.Builder();
 

@@ -68,13 +68,7 @@ repositories {
 }
 dependencies {
     //Anythink (Necessary)
-    api "com.anythink.sdk:core-tpn:6.5.36.1"
-    api "com.anythink.sdk:nativead-tpn:6.5.36.1"
-    api "com.anythink.sdk:banner-tpn:6.5.36.1"
-    api "com.anythink.sdk:interstitial-tpn:6.5.36.1"
-    api "com.anythink.sdk:rewardedvideo-tpn:6.5.36.1"
-    api "com.anythink.sdk:splash-tpn:6.5.36.1"
-    api "com.anythink.sdk:dm-vp-tpn:6.5.36.1"
+    api "com.anythink.sdk:core-tpn:6.5.73.3"
 
     //Androidx (Necessary)
     api "androidx.appcompat:appcompat:1.6.1"
@@ -155,7 +149,6 @@ dependencies {
 
     //Googleima
     api "com.anythink.sdk:adapter-tpn-googleima:6.5.36"
-    api "com.anythink.sdk:mediavideo-tpn:6.5.36"
     api "com.google.ads.interactivemedia.v3:interactivemedia:3.33.0"
     api "androidx.appcompat:appcompat:1.6.1"
     api "androidx.browser:browser:1.6.0"
@@ -184,8 +177,8 @@ dependencies {
     api "com.inmobi.monetization:inmobi-ads-kotlin:10.8.7"
 
     //Anythink Adx SDK(Necessary)
-    api "com.anythink.sdk:adapter-tpn-sdm:6.5.36.5"
-    api "com.smartdigimkttech.sdk:smartdigimkttech-sdk:6.5.45"
+    api "com.anythink.sdk:adapter-tpn-sdm:6.5.68.1.1"
+    api "com.smartdigimkttech.sdk:smartdigimkttech-sdk:6.5.68"
 
     //AppLovin
     api "com.anythink.sdk:adapter-tpn-applovin:6.5.36"
@@ -231,5 +224,5 @@ dependencies {
     api "co.ogury:ogury-sdk:5.2.0"
 
 //Tramini
-    api "com.anythink.sdk:tramini-plugin-tpn:6.5.36"
+    api "com.anythink.sdk:tramini-plugin-tpn:6.5.73"
 }
