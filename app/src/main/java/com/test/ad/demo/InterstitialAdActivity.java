@@ -107,6 +107,11 @@ public class InterstitialAdActivity extends BaseActivity implements View.OnClick
             }
 
             @Override
+            public void onInterstitialAdReward(ATAdInfo atAdInfo) {
+
+            }
+
+            @Override
             public void onInterstitialAdLoaded() {
                 Log.i(TAG, "onInterstitialAdLoaded");
                 printLogOnUI("onInterstitialAdLoaded");
@@ -320,7 +325,7 @@ public class InterstitialAdActivity extends BaseActivity implements View.OnClick
                 isAdReady();
                 break;
             case R.id.show_ad_btn:
-                ATInterstitial.entryAdScenario(mCurrentPlacementId, AdConst.SCENARIO_ID.INTERSTITIAL_AD_SCENARIO);
+                mInterstitialAd.entryAdScenario(AdConst.SCENARIO_ID.INTERSTITIAL_AD_SCENARIO);
                 if (mInterstitialAd.isAdReady()) {
                     showAd();
                 }

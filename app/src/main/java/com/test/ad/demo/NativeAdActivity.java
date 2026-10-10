@@ -210,6 +210,16 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
                 }
 
                 @Override
+                public void onAdActRewardSuccess(ATAdInfo atAdInfo) {
+
+                }
+
+                @Override
+                public void onAdActReward(ATAdInfo atAdInfo, int i) {
+
+                }
+
+                @Override
                 public void onAdImpressed(ATNativeAdView view, ATAdInfo entity) {
                     Log.i(TAG, "native ad onAdImpressed:\n" + entity.toString());
                     printLogOnUI("onAdImpressed");
@@ -379,7 +389,7 @@ public class NativeAdActivity extends BaseActivity implements View.OnClickListen
                 isAdReady();
                 break;
             case R.id.show_ad_btn:
-                ATNative.entryAdScenario(mCurrentPlacementId, AdConst.SCENARIO_ID.NATIVE_AD_SCENARIO);
+                mATNative.entryAdScenario(AdConst.SCENARIO_ID.NATIVE_AD_SCENARIO);
                 if (isAdReady()) {
                     showAd();
                 }

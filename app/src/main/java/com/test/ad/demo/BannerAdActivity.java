@@ -47,7 +47,7 @@ public class BannerAdActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onSelectPlacementId(String placementId) {
         mBannerView.setPlacementId(placementId);
-        ATBannerView.entryAdScenario(placementId, AdConst.SCENARIO_ID.BANNER_AD_SCENARIO);
+        mBannerView.entryAdScenario(AdConst.SCENARIO_ID.BANNER_AD_SCENARIO);
         //        mBannerView.setScenario(AdConst.SCENARIO_ID.BANNER_AD_SCENARIO);
         mBannerView.setShowConfig(getATShowConfig());
     }

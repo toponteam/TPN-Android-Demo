@@ -284,6 +284,11 @@ public class SplashAdShowActivity extends Activity implements ATSplashExListener
 
     }
 
+    @Override
+    public void onSplashAdReward(ATAdInfo atAdInfo) {
+
+    }
+
     private ATShowConfig getATShowConfig() {
         ATShowConfig.Builder builder = new ATShowConfig.Builder();
         builder.scenarioId(AdConst.SCENARIO_ID.SPLASH_AD_SCENARIO);

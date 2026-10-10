@@ -377,7 +377,7 @@ public class MediaVideoActivity extends BaseActivity implements View.OnClickList
                 isAdReady();
                 break;
             case R.id.show_ad_btn:
-                ATMediaVideo.entryAdScenario(mCurrentPlacementId, AdConst.SCENARIO_ID.MEDIA_VIDEO_AD_SCENARIO);
+                mATMediaVideo.entryAdScenario(AdConst.SCENARIO_ID.MEDIA_VIDEO_AD_SCENARIO);
                 if (mATMediaVideo != null) {
                     showAd();
                 }
